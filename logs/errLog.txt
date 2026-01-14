@@ -1,2 +1,13 @@
 20240113	04:24:50	021e44d9-eecd-4fd6-87e1-b44e1b75c8c4	Error Not allowed by cors
 20240113	04:24:50	1989ed6e-506c-469e-a13e-2aa04efec364	Error Not allowed by cors
+20260113	18:30:49	35273f97-a9a4-4445-8a7a-7a3c8e9b583f	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	18:30:50	301565c4-ad4e-4c50-b301-c2b0a2c5d2d7	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	18:30:52	100553e6-1892-44a0-a0af-9b52ffd37be5	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	18:30:56	b3f37d6b-2298-4fa4-aa45-807f6dcb1565	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	18:31:53	cc897197-8d03-4d52-a354-507a92a6b4d0	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	18:31:54	775dba2f-c209-43c8-b79b-d9a67cb60342	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	18:31:56	626067c0-00cd-4f96-80fe-03cd9865cdd2	TypeError Cannot read properties of undefined (reading 'UserInfo')
+20260113	23:08:10	4afd1a9e-761f-40db-960e-82b7fc585a6f	Error Not allowed by cors
+20260114	00:02:21	fa446944-0f70-4592-b727-2b00e198b9fa	Error Not allowed by cors
+20260114	00:02:59	4cab5f2e-7d0c-45a8-8f3d-e2b29c68574e	Error Not allowed by cors
+20260114	00:03:21	ce0ee961-f891-4e5b-a65d-099f48578525	Error Not allowed by cors

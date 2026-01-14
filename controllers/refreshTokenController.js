@@ -1,36 +1,32 @@
-const User = require('../model/User');
-const jwt = require('jsonwebtoken');
+const User = require("../model/User");
+const jwt = require("jsonwebtoken");
 
 const handleRefreshToken = async (req, res) => {
+  // Check body (Native) OR cookies (Web fallback)
+  //console.log("Full Request Body:", req.body); // Add this
 
-    const cookies = req.cookies;
-    //console.log("cookies",cookies);
+  const refreshToken = req.body.refreshToken || req.cookies?.jwt;
 
-    if (!cookies?.jwt) return res.sendStatus(401);
-    const refreshToken = cookies.jwt;
-    //console.log("refreshToken",refreshToken);
+  if (!refreshToken) {
+    console.log("No refresh token found in body or cookies");
+    return res.sendStatus(401);
+  }
 
-    const foundUser = await User.findOne({refreshToken}).exec();
-    if (!foundUser) return res.sendStatus(403); //Forbidden 
-    // evaluate jwt 
-    jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET,
-        (err, decoded) => {
-            if (err || foundUser.username !== decoded.UserInfo.username) return res.sendStatus(403);//Forbidden 
-            const roles = Object.values(foundUser.roles)
-            const accessToken = jwt.sign(
-                { "UserInfo": { 
-                    "username": decoded.username,
-                    "roles": roles
-                    }
-                },
-                process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '60s' }
-            );
-            res.json({ roles, accessToken })
-        }
+  const foundUser = await User.findOne({ refreshToken }).exec();
+  //console.log("foundUser", foundUser);
+  if (!foundUser) return res.sendStatus(403); //Forbidden
+
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+    if (err || foundUser.username !== decoded.username)
+      return res.sendStatus(403);
+    const roles = Object.values(foundUser.roles);
+    const accessToken = jwt.sign(
+      { UserInfo: { username: decoded.username, roles: roles } },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: "15m" }
     );
-}
-
-module.exports = { handleRefreshToken }
+    // Send back the access token (and roles if needed)
+    res.json({ roles, accessToken });
+  });
+};
+module.exports = { handleRefreshToken };
